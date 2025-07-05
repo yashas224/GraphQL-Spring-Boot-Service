@@ -1,0 +1,16 @@
+#home page - get movies by genre
+#load movies by id
+#load user profile with recommended and watchlist
+#Add movies to user watchlist
+#Update user with fav genre
+
+type Query {
+    userProfile(id: ID!): UserProfile
+    movieDetails(id: Int!): MovieDetails
+    moviesByGenre(genre: Genre!): [MovieSummary]!
+}
+
+type Mutation {
+    addToWatchList(watchListInput: WatchListInput!) : WatchListResponse
+    updateProfile(customerInput :CustomerInput!): UserProfile
+}

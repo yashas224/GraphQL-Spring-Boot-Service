@@ -1,0 +1,101 @@
+query HomePage{
+  moviesByGenre(genre: MYSTERY){
+    genre
+    rating
+    id
+    releaseYear
+    title
+  }
+}
+
+query getMovieDetail{
+  movieDetails(id:14){
+    id
+    title
+    rating
+    releaseYear
+    genre
+    review{
+      rating
+      username
+      id
+      comment
+    }
+  }
+
+}
+
+query loadUserProfile{
+  userProfile(id:2){
+    id
+    name
+    favoriteGenre
+    recommended{
+      ...movieBasicDetails
+    }
+    watchList{
+      ...movieBasicDetails
+    }
+  }
+}
+
+fragment movieBasicDetails on Movies{
+      genre
+      id
+      rating
+      releaseYear
+      title
+}
+
+mutation addToWatchList($watchListInput: WatchListInput!) {
+  addToWatchList(watchListInput: $watchListInput) {
+ 		status
+    watchList{
+      id
+      title
+      rating
+      releaseYear
+      genre
+    }
+  }
+}
+
+{
+  "watchListInput": {
+    "customerId": 2,
+    "movieId": 109
+  }
+}
+
+
+
+mutation updateProfile($customerInput: CustomerInput!) {
+   updateProfile (customerInput: $customerInput) {
+    id
+    name
+    favoriteGenre
+    recommended{
+      ...movieBasicDetails
+    }
+    watchList{
+      ...movieBasicDetails
+    }
+  }
+}
+
+fragment movieBasicDetails on Movies{
+      genre
+      id
+      rating
+      releaseYear
+      title
+}
+
+{
+  "customerInput": {
+    "favoriteGenre": "HORROR",
+    "id": 2,
+    "name":"Test Name "
+  }
+
+}

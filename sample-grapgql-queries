@@ -1,0 +1,9 @@
+query HomePage{
+  moviesByGenre(genre: ACTION){
+    id
+    releaseYear
+    title
+    rating
+  }
+}
+

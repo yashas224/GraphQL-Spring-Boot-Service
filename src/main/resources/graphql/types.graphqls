@@ -1,0 +1,76 @@
+type Review {
+    comment: String
+    id: ID!
+    rating: Int
+    username: String
+}
+
+enum Genre {
+    ACTION
+    ADVENTURE
+    ANIMATION
+    BIOGRAPHY
+    COMEDY
+    CRIME
+    DOCUMENTARY
+    DRAMA
+    FANTASY
+    HORROR
+    MYSTERY
+}
+
+interface Movies {
+    genre:Genre!
+    id: ID!
+    rating: String
+    releaseYear  : Int
+    title:String!
+}
+
+type MovieSummary implements Movies{
+    genre:Genre!
+    id: ID!
+    rating: String
+    releaseYear  : Int
+    title:String!
+}
+
+type MovieDetails implements Movies{
+    genre:Genre!
+    id: ID!
+    rating: String
+    releaseYear  : Int
+    title:String!
+    review :[Review]!
+}
+
+
+type UserProfile{
+    favoriteGenre: Genre
+    id: ID!
+    name: String!
+    watchList: [MovieSummary]!
+    recommended : [MovieSummary]!
+}
+
+
+input CustomerInput {
+    id :ID!
+    favoriteGenre: Genre
+    name: String
+}
+
+input WatchListInput {
+    customerId :Int!
+    movieId: Int!
+}
+
+type WatchListResponse{
+    status: Status!
+    watchList: [MovieSummary]!
+}
+
+enum Status {
+    SUCCESS
+    FAILURE
+}
